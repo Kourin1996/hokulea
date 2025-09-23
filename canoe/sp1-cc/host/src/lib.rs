@@ -158,11 +158,17 @@ async fn get_sp1_cc_proof(
         // Talked to sp1-cc developer already, and it is agreed.
         let is_valid = match &canoe_input.altda_commitment.versioned_cert {
             EigenDAVersionedCert::V2(_) => {
-                println!("\n\nget_sp1_cc_proof::EigenDAVersionedCert::V2\n\n");
+                println!(
+                    "\n\nget_sp1_cc_proof::EigenDAVersionedCert::V2 length={}\n\n",
+                    returns_bytes.len()
+                );
                 Bool::abi_decode(&returns_bytes).expect("deserialize returns_bytes")
             }
             EigenDAVersionedCert::V3(_) => {
-                println!("\n\nget_sp1_cc_proof::EigenDAVersionedCert::V3\n\n");
+                println!(
+                    "\n\nget_sp1_cc_proof::EigenDAVersionedCert::V3 length={}\n\n",
+                    returns_bytes.len()
+                );
                 let returns = <StatusCode as SolType>::abi_decode(&returns_bytes)
                     .expect("deserialize returns_bytes");
                 returns == StatusCode::SUCCESS
