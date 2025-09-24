@@ -206,6 +206,10 @@ async fn get_sp1_cc_proof(
         warn!("NETWORK_PRIVATE_KEY is not set, using default network private key");
         DEFAULT_NETWORK_PRIVATE_KEY.to_string()
     });
+    println!(
+        "\n\n!!! hokulea network_private_key={}network_private_key !!!\n\n\n",
+        network_private_key
+    );
     let client = ProverClient::builder()
         .network()
         .private_key(&network_private_key)
