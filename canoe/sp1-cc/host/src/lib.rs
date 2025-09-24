@@ -143,14 +143,14 @@ async fn get_sp1_cc_proof(
             CertVerifierCall::V2(call) => {
                 println!(
                     "\n\n!!! url={}, verifier_address={}!!!\n\n",
-                    rpc_url, canoe_input.verifier_address,
+                    eth_rpc_url, canoe_input.verifier_address,
                 );
                 ContractInput::new_call(canoe_input.verifier_address, Address::default(), call)
             }
             CertVerifierCall::Router(call) => {
                 println!(
                     "\n\n!!! url={}, verifier_address={}!!!\n\n",
-                    rpc_url, canoe_input.verifier_address,
+                    eth_rpc_url, canoe_input.verifier_address,
                 );
                 ContractInput::new_call(canoe_input.verifier_address, Address::default(), call)
             }
