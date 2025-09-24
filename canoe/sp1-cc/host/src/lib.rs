@@ -142,14 +142,14 @@ async fn get_sp1_cc_proof(
         let contract_input = match CertVerifierCall::build(&canoe_input.altda_commitment) {
             CertVerifierCall::V2(call) => {
                 println!(
-                    "\n\n!!! verifier_address={}, calldata={}!!!\n\n",
+                    "\n\n!!! verifier_address={}, calldata={:?}!!!\n\n",
                     canoe_input.verifier_address, call
                 );
                 ContractInput::new_call(canoe_input.verifier_address, Address::default(), call)
             }
             CertVerifierCall::Router(call) => {
                 println!(
-                    "\n\n!!! verifier_address={}, calldata={}!!!\n\n",
+                    "\n\n!!! verifier_address={}, calldata={:?}!!!\n\n",
                     canoe_input.verifier_address, call
                 );
                 ContractInput::new_call(canoe_input.verifier_address, Address::default(), call)
