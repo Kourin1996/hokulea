@@ -238,10 +238,8 @@ async fn get_sp1_cc_proof(
         let proof = client
             .prove(&pk, &stdin)
             .compressed()
-            .strategy(FulfillmentStrategy::Hosted)
+            .strategy(FulfillmentStrategy::Reserved)
             .skip_simulation(true)
-            .cycle_limit(1_000_000_000_000)
-            .gas_limit(1_000_000_000_000)
             .timeout(Duration::from_secs(4 * 60 * 60))
             .run()
             .expect("sp1-cc should have produced a compressed proof");
