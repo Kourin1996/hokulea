@@ -141,17 +141,9 @@ async fn get_sp1_cc_proof(
     for canoe_input in canoe_inputs.iter() {
         let contract_input = match CertVerifierCall::build(&canoe_input.altda_commitment) {
             CertVerifierCall::V2(call) => {
-                println!(
-                    "\n\n!!! url={}, verifier_address={}!!!\n\n",
-                    eth_rpc_url, canoe_input.verifier_address,
-                );
                 ContractInput::new_call(canoe_input.verifier_address, Address::default(), call)
             }
             CertVerifierCall::Router(call) => {
-                println!(
-                    "\n\n!!! url={}, verifier_address={}!!!\n\n",
-                    eth_rpc_url, canoe_input.verifier_address,
-                );
                 ContractInput::new_call(canoe_input.verifier_address, Address::default(), call)
             }
         };
@@ -166,17 +158,9 @@ async fn get_sp1_cc_proof(
         // Talked to sp1-cc developer already, and it is agreed.
         let is_valid = match &canoe_input.altda_commitment.versioned_cert {
             EigenDAVersionedCert::V2(_) => {
-                println!(
-                    "\n\nget_sp1_cc_proof::EigenDAVersionedCert::V2 length={}\n\n",
-                    returns_bytes.len()
-                );
                 Bool::abi_decode(&returns_bytes).expect("deserialize returns_bytes")
             }
             EigenDAVersionedCert::V3(_) => {
-                println!(
-                    "\n\nget_sp1_cc_proof::EigenDAVersionedCert::V3 length={}\n\n",
-                    returns_bytes.len()
-                );
                 let returns = <StatusCode as SolType>::abi_decode(&returns_bytes)
                     .expect("deserialize returns_bytes");
                 returns == StatusCode::SUCCESS
@@ -206,10 +190,6 @@ async fn get_sp1_cc_proof(
         warn!("NETWORK_PRIVATE_KEY is not set, using default network private key");
         DEFAULT_NETWORK_PRIVATE_KEY.to_string()
     });
-    println!(
-        "\n\n!!! hokulea network_private_key={}network_private_key !!!\n\n\n",
-        network_private_key
-    );
     let client = ProverClient::builder()
         .network()
         .private_key(&network_private_key)
